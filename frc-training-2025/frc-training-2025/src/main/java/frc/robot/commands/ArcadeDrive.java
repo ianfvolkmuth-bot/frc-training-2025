@@ -35,6 +35,8 @@ public class ArcadeDrive extends Command {
     m_turn = m_joystick.getX();
     m_left = m_speed + m_turn;
     m_right = m_speed - m_turn;
+    m_drivetrain.setLeftSpeed(m_left);
+    m_drivetrain.setRightSpeed(m_right);
   }
 
   // Called once the command ends or is interrupted.

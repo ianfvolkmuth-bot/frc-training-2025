@@ -4,11 +4,19 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.constants.IOConstants;
+import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
+  Drivetrain m_drivetrain = new Drivetrain();
+  Joystick m_joystick = new Joystick(IOConstants.kJoystickPort);
+  ArcadeDrive m_arcadeDrive = new ArcadeDrive(null, m_drivetrain);
   public RobotContainer() {
+    m_drivetrain.setDefaultCommand(m_arcadeDrive);
     configureBindings();
   }
 
