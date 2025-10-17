@@ -6,6 +6,6 @@ package frc.robot.constants;
 
 /** Add your docs here. */
 public class MotorConstants {
-    public final static int kMotorID = 0;
+    public final static int kMotorID = 16;
     public final static double kMotorMultiplier = 0.5;
 }
