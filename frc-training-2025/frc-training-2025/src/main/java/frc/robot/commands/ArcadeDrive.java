@@ -19,10 +19,10 @@ public class ArcadeDrive extends Command {
   private double m_left;
   private double m_right;
   public ArcadeDrive(Joystick joystick, Drivetrain drivetrain) {
-    addRequirements(m_drivetrain);
     // Use addRequirements() here to declare subsystem dependencies.
     m_joystick = joystick;
     m_drivetrain = drivetrain;
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
