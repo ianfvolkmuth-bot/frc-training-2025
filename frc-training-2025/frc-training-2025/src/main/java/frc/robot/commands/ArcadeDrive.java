@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.DrivetrainConstants;
 import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -31,8 +32,10 @@ public class ArcadeDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_speed = m_joystick.getY();
-    m_turn = m_joystick.getX();
+    m_speed = m_joystick.getRawAxis(DrivetrainConstants.kJoystickSpeedAxis);
+    m_turn = m_joystick.getRawAxis(DrivetrainConstants.kJoystickTurnAxis);
+    m_speed *= DrivetrainConstants.kJoystickMultiplier;
+    m_turn *= DrivetrainConstants.kJoystickMultiplier;
     m_left = m_speed + m_turn;
     m_right = m_speed - m_turn;
     m_drivetrain.setLeftSpeed(m_left);

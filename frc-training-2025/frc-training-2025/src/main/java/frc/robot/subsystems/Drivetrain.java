@@ -11,15 +11,15 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.MotorConstants;
+import frc.robot.constants.DrivetrainConstants;
 
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Motor. */
-  private TalonSRX m_leftPrimaryMotor = new TalonSRX(MotorConstants.kLeftPrimaryMotorID);
-  private TalonSRX m_rightPrimaryMotor = new TalonSRX(MotorConstants.kRightPrimaryMotorID);
+  private TalonSRX m_leftPrimaryMotor = new TalonSRX(DrivetrainConstants.kLeftPrimaryMotorID);
+  private TalonSRX m_rightPrimaryMotor = new TalonSRX(DrivetrainConstants.kRightPrimaryMotorID);
 
-  private VictorSPX m_leftSecondaryMotor = new VictorSPX(MotorConstants.kLeftSecondaryMotorID);
-  private VictorSPX m_rightSecondaryMotor = new VictorSPX(MotorConstants.kRightSecondaryMotorID);
+  private VictorSPX m_leftSecondaryMotor = new VictorSPX(DrivetrainConstants.kLeftSecondaryMotorID);
+  private VictorSPX m_rightSecondaryMotor = new VictorSPX(DrivetrainConstants.kRightSecondaryMotorID);
 
   public Drivetrain() {
     m_leftPrimaryMotor.setNeutralMode(NeutralMode.Brake);
