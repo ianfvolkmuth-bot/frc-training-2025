@@ -6,11 +6,11 @@ package frc.robot.constants;
 
 /** Add your docs here. */
 public class DrivetrainConstants {
-    public static final int kLeftPrimaryMotorID = 0;
-    public static final int kRightPrimaryMotorID = 1;
+    public static final int kLeftPrimaryMotorID = 6;
+    public static final int kRightPrimaryMotorID = 3;
     
-    public static final int kLeftSecondaryMotorID = 3;
-    public static final int kRightSecondaryMotorID = 4;
+    public static final int kLeftSecondaryMotorID = 8;
+    public static final int kRightSecondaryMotorID = 7;
 
     public static final int kJoystickSpeedAxis = 0;
     public static final int kJoystickTurnAxis = 1;
