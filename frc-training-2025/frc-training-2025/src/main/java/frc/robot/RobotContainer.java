@@ -14,7 +14,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   Drivetrain m_drivetrain = new Drivetrain();
   Joystick m_joystick = new Joystick(IOConstants.kJoystickPort);
-  ArcadeDrive m_arcadeDrive = new ArcadeDrive(null, m_drivetrain);
+  ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
     configureBindings();
