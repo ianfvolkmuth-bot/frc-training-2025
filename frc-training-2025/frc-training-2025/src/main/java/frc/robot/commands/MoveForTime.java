@@ -11,7 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class MoveForTime extends Command {
   /** Creates a new MoveForTime. */
-  private Timer m_timer;
+  private Timer m_timer = new Timer();
   private Drivetrain m_drivetrain;
   private double m_targetTimeSeconds;
   private double m_speed;
