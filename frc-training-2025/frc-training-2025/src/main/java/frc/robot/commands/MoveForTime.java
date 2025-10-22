@@ -4,43 +4,38 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.DrivetrainConstants;
-import frc.robot.constants.IOConstants;
 import frc.robot.subsystems.Drivetrain;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ArcadeDrive extends Command {
-  /** Creates a new ArcadeDrive. */
+public class MoveForTime extends Command {
+  /** Creates a new MoveForTime. */
+  private Timer m_timer;
   private Drivetrain m_drivetrain;
-  private Joystick m_joystick;
+  private double m_targetTimeSeconds;
   private double m_speed;
-  private double m_turn;
-  private double m_left;
-  private double m_right;
-  public ArcadeDrive(Joystick joystick, Drivetrain drivetrain) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_joystick = joystick;
+
+  public MoveForTime(Drivetrain drivetrain, double targetTimeSeconds, double speed) {
     m_drivetrain = drivetrain;
+    m_targetTimeSeconds = targetTimeSeconds;
+    m_speed = speed;
     addRequirements(m_drivetrain);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_timer.reset();
+    m_timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_speed = m_joystick.getRawAxis(IOConstants.kJoystickSpeedAxis);
-    m_turn = m_joystick.getRawAxis(IOConstants.kJoystickTurnAxis);
-    m_speed *= DrivetrainConstants.kJoystickMultiplier;
-    m_turn *= DrivetrainConstants.kJoystickMultiplier;
-    m_left = m_speed + m_turn;
-    m_right = m_speed - m_turn;
-    m_drivetrain.setLeftSpeed(m_left);
-    m_drivetrain.setRightSpeed(m_right);
+    m_drivetrain.setLeftSpeed(m_speed);
+    m_drivetrain.setRightSpeed(m_speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,11 +43,12 @@ public class ArcadeDrive extends Command {
   public void end(boolean interrupted) {
     m_drivetrain.setLeftSpeed(0);
     m_drivetrain.setRightSpeed(0);
+    m_timer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_timer.hasElapsed(m_targetTimeSeconds);
   }
 }

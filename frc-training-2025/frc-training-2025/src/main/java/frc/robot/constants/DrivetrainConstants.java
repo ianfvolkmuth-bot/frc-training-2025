@@ -12,5 +12,8 @@ public class DrivetrainConstants {
     public static final int kLeftSecondaryMotorID = 8;
     public static final int kRightSecondaryMotorID = 7;
 
+    public static final double kMoveForTimeSpeedOne = 0.30;
+    public static final double kTargetTimeSeconds = 8;
+
     public static final double kJoystickMultiplier = 0.5;
 }
