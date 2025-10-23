@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
 import frc.robot.constants.DrivetrainConstants;
 import frc.robot.constants.IOConstants;
@@ -18,6 +19,8 @@ public class RobotContainer {
   ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
 
   MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, DrivetrainConstants.kTargetTimeSeconds, DrivetrainConstants.kMoveForTimeSpeedOne);
+  MoveForDistance m_moveForDistance = new MoveForDistance(m_drivetrain, DrivetrainConstants.kMoveForDistanceTargetFeet, DrivetrainConstants.kMoveForDistanceSpeed);
+
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
     
@@ -27,7 +30,7 @@ public class RobotContainer {
   private void configureBindings() {}
 
   public Command getAutonomousCommand() {
-    
-    return m_moveForTime;
+    return m_moveForDistance;
+    // return m_moveForTime;
   }
 }

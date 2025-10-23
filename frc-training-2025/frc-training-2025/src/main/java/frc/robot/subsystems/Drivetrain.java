@@ -48,6 +48,10 @@ public class Drivetrain extends SubsystemBase {
     return m_leftPrimaryMotor.getMotorOutputPercent();
   }
 
+  public double getTicks() {
+    return m_leftPrimaryMotor.getSelectedSensorPosition();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
