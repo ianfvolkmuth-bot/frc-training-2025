@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.MoveForDistance;
@@ -27,7 +26,7 @@ public class RobotContainer {
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
     SendableRegistry.add(m_moveForDistance.getMoveForDistanceSendable(), "MoveForDistance");
-    Shuffleboard.getTab("SmartDashboard");
+    Shuffleboard.getTab("SmartDashboard").add(m_moveForDistance.getMoveForDistanceSendable()).withWidget("MoveForDistance");
     // SmartDashboard.putData(m_moveForDistance.getMoveForDistanceSendable());
     configureBindings();
   }
