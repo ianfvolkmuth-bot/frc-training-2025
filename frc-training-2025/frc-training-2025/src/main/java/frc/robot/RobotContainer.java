@@ -4,7 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.MoveForDistance;
@@ -14,16 +17,18 @@ import frc.robot.constants.IOConstants;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
-  Drivetrain m_drivetrain = new Drivetrain();
-  Joystick m_joystick = new Joystick(IOConstants.kJoystickPort);
-  ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
+  private Drivetrain m_drivetrain = new Drivetrain();
+  private Joystick m_joystick = new Joystick(IOConstants.kJoystickPort);
+  private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
 
-  MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, DrivetrainConstants.kTargetTimeSeconds, DrivetrainConstants.kMoveForTimeSpeedOne);
-  MoveForDistance m_moveForDistance = new MoveForDistance(m_drivetrain, DrivetrainConstants.kMoveForDistanceTargetFeet, DrivetrainConstants.kMoveForDistanceSpeed);
+  private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, DrivetrainConstants.kTargetTimeSeconds, DrivetrainConstants.kMoveForTimeSpeedOne);
+  private MoveForDistance m_moveForDistance = new MoveForDistance(m_drivetrain, DrivetrainConstants.kMoveForDistanceTargetFeet, DrivetrainConstants.kMoveForDistanceSpeed);
 
   public RobotContainer() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
-    
+    SendableRegistry.add(m_moveForDistance.getMoveForDistanceSendable(), "MoveForDistance");
+    Shuffleboard.getTab("SmartDashboard");
+    // SmartDashboard.putData(m_moveForDistance.getMoveForDistanceSendable());
     configureBindings();
   }
 

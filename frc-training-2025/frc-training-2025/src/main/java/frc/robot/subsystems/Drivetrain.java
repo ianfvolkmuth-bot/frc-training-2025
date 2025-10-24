@@ -48,7 +48,7 @@ public class Drivetrain extends SubsystemBase {
     return m_leftPrimaryMotor.getMotorOutputPercent();
   }
 
-  public double getTicks() {
+  public double getLeftPrimaryMotorTicks() {
     return m_leftPrimaryMotor.getSelectedSensorPosition();
   }
 

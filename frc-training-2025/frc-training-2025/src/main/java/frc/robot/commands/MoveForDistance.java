@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.DrivetrainConstants;
 import frc.robot.subsystems.Drivetrain;
@@ -14,6 +16,7 @@ public class MoveForDistance extends Command {
   private Drivetrain m_drivetrain;
   private double m_speed;
   private double m_targetDistanceTicks;
+
   private double m_currentTicks;
   private double m_errorTicks;
   
@@ -28,14 +31,14 @@ public class MoveForDistance extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_currentTicks = m_drivetrain.getTicks();
+    m_currentTicks = m_drivetrain.getLeftPrimaryMotorTicks();
     m_targetDistanceTicks += m_currentTicks;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_currentTicks = m_drivetrain.getTicks();
+    m_currentTicks = m_drivetrain.getLeftPrimaryMotorTicks();
     m_errorTicks = m_targetDistanceTicks - m_currentTicks;
     m_drivetrain.setLeftSpeed(m_speed);
     m_drivetrain.setRightSpeed(m_speed);
@@ -49,5 +52,22 @@ public class MoveForDistance extends Command {
   @Override
   public boolean isFinished() {
     return (m_errorTicks == 0);
+  }
+
+  private class MoveForDistanceSendable implements Sendable {
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("MoveForDistance");
+        builder.addDoubleProperty("Speed", () -> m_speed, null);
+        builder.addDoubleProperty("Current In Ticks", () -> m_currentTicks, null);
+        builder.addDoubleProperty("Target In Ticks", () -> m_targetDistanceTicks, null);
+        builder.addDoubleProperty("Error In Ticks", () -> m_errorTicks, null);
+    }
+  }
+
+  MoveForDistanceSendable m_moveForDistanceSendable = new MoveForDistanceSendable();
+
+  public MoveForDistanceSendable getMoveForDistanceSendable() {
+    return m_moveForDistanceSendable;
   }
 }
