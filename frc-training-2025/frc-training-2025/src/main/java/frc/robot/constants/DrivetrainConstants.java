@@ -19,7 +19,7 @@ public class DrivetrainConstants {
     public static final double kMoveForDistanceTargetFeet = 10.0;
 
     public static final double kWheelRadiusFeet = (5.0 / 24.0);
-    public static final double kTicksPerRotation = 100;
+    public static final double kTicksPerRotation = 0;
 
     public static final double kJoystickMultiplier = 0.5;
 }
