@@ -21,5 +21,11 @@ public class DrivetrainConstants {
     public static final double kWheelRadiusFeet = (5.0 / 24.0);
     public static final double kTicksPerRotation = 0;
 
+    public static final double kPMoveWithPID = 0.5;
+    public static final double kIMoveWithPID = 0.5;
+    public static final double kDMoveWithPID = 0.1;
+
+    public static final double kMoveWithPIDDistanceTargetFeet = 10;
+
     public static final double kJoystickMultiplier = 0.5;
 }
